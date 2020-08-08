@@ -9,21 +9,27 @@
 /* Begin PBXBuildFile section */
 		F601B7F524DE9B0100ABE527 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F601B7F424DE9B0100ABE527 /* AppDelegate.swift */; };
 		F601B7F724DE9B0100ABE527 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F601B7F624DE9B0100ABE527 /* SceneDelegate.swift */; };
-		F601B7F924DE9B0100ABE527 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F601B7F824DE9B0100ABE527 /* ContentView.swift */; };
 		F601B7FB24DE9B0800ABE527 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F601B7FA24DE9B0800ABE527 /* Assets.xcassets */; };
 		F601B7FE24DE9B0800ABE527 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F601B7FD24DE9B0800ABE527 /* Preview Assets.xcassets */; };
 		F601B80124DE9B0800ABE527 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F601B7FF24DE9B0800ABE527 /* LaunchScreen.storyboard */; };
+		F601B80924DE9BE200ABE527 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F601B80824DE9BE200ABE527 /* MainView.swift */; };
+		F624899B24DEA40200CBA95A /* PlayGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F624899A24DEA40200CBA95A /* PlayGameView.swift */; };
+		F624899D24DEA7D700CBA95A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F624899C24DEA7D700CBA95A /* SettingView.swift */; };
+		F62489A124DEC43A00CBA95A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F62489A024DEC43A00CBA95A /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F601B7F124DE9B0100ABE527 /* FarkleGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FarkleGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F601B7F424DE9B0100ABE527 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F601B7F624DE9B0100ABE527 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F601B7F824DE9B0100ABE527 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F601B7FA24DE9B0800ABE527 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F601B7FD24DE9B0800ABE527 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F601B80024DE9B0800ABE527 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F601B80224DE9B0800ABE527 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F601B80824DE9BE200ABE527 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		F624899A24DEA40200CBA95A /* PlayGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayGameView.swift; sourceTree = "<group>"; };
+		F624899C24DEA7D700CBA95A /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		F62489A024DEC43A00CBA95A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +46,7 @@
 		F601B7E824DE9B0100ABE527 = {
 			isa = PBXGroup;
 			children = (
+				F62489A024DEC43A00CBA95A /* README.md */,
 				F601B7F324DE9B0100ABE527 /* FarkleGame */,
 				F601B7F224DE9B0100ABE527 /* Products */,
 			);
@@ -58,11 +65,13 @@
 			children = (
 				F601B7F424DE9B0100ABE527 /* AppDelegate.swift */,
 				F601B7F624DE9B0100ABE527 /* SceneDelegate.swift */,
-				F601B7F824DE9B0100ABE527 /* ContentView.swift */,
 				F601B7FA24DE9B0800ABE527 /* Assets.xcassets */,
 				F601B7FF24DE9B0800ABE527 /* LaunchScreen.storyboard */,
 				F601B80224DE9B0800ABE527 /* Info.plist */,
 				F601B7FC24DE9B0800ABE527 /* Preview Content */,
+				F601B80824DE9BE200ABE527 /* MainView.swift */,
+				F624899A24DEA40200CBA95A /* PlayGameView.swift */,
+				F624899C24DEA7D700CBA95A /* SettingView.swift */,
 			);
 			path = FarkleGame;
 			sourceTree = "<group>";
@@ -135,6 +144,7 @@
 			files = (
 				F601B80124DE9B0800ABE527 /* LaunchScreen.storyboard in Resources */,
 				F601B7FE24DE9B0800ABE527 /* Preview Assets.xcassets in Resources */,
+				F62489A124DEC43A00CBA95A /* README.md in Resources */,
 				F601B7FB24DE9B0800ABE527 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,9 +156,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F624899B24DEA40200CBA95A /* PlayGameView.swift in Sources */,
+				F624899D24DEA7D700CBA95A /* SettingView.swift in Sources */,
 				F601B7F524DE9B0100ABE527 /* AppDelegate.swift in Sources */,
+				F601B80924DE9BE200ABE527 /* MainView.swift in Sources */,
 				F601B7F724DE9B0100ABE527 /* SceneDelegate.swift in Sources */,
-				F601B7F924DE9B0100ABE527 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
