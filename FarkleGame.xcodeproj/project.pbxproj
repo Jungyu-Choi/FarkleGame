@@ -16,9 +16,11 @@
 		F624899B24DEA40200CBA95A /* PlayGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F624899A24DEA40200CBA95A /* PlayGameView.swift */; };
 		F624899D24DEA7D700CBA95A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F624899C24DEA7D700CBA95A /* SettingView.swift */; };
 		F62489A124DEC43A00CBA95A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F62489A024DEC43A00CBA95A /* README.md */; };
+		F62DC14024E139B800A2030F /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62DC13F24E139B800A2030F /* GameSetting.swift */; };
+		F62DC14224E13D6E00A2030F /* ScoreCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62DC14124E13D6E00A2030F /* ScoreCalculation.swift */; };
+		F62DC14424E1554E00A2030F /* ScoreableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62DC14324E1554E00A2030F /* ScoreableModel.swift */; };
 		F6B1522E24DFB3A600BDFBCB /* DiceArrayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B1522D24DFB3A600BDFBCB /* DiceArrayView.swift */; };
 		F6B1523124DFB43400BDFBCB /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B1523024DFB43400BDFBCB /* Dice.swift */; };
-		F6B1523324DFBA3F00BDFBCB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B1523224DFBA3F00BDFBCB /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,9 +35,11 @@
 		F624899A24DEA40200CBA95A /* PlayGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayGameView.swift; sourceTree = "<group>"; };
 		F624899C24DEA7D700CBA95A /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		F62489A024DEC43A00CBA95A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.markdown; };
+		F62DC13F24E139B800A2030F /* GameSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
+		F62DC14124E13D6E00A2030F /* ScoreCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCalculation.swift; sourceTree = "<group>"; };
+		F62DC14324E1554E00A2030F /* ScoreableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreableModel.swift; sourceTree = "<group>"; };
 		F6B1522D24DFB3A600BDFBCB /* DiceArrayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceArrayView.swift; sourceTree = "<group>"; };
 		F6B1523024DFB43400BDFBCB /* Dice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dice.swift; sourceTree = "<group>"; };
-		F6B1523224DFBA3F00BDFBCB /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +100,9 @@
 			isa = PBXGroup;
 			children = (
 				F6B1523024DFB43400BDFBCB /* Dice.swift */,
-				F6B1523224DFBA3F00BDFBCB /* Player.swift */,
+				F62DC13F24E139B800A2030F /* GameSetting.swift */,
+				F62DC14124E13D6E00A2030F /* ScoreCalculation.swift */,
+				F62DC14324E1554E00A2030F /* ScoreableModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -177,10 +183,12 @@
 				F6B1523124DFB43400BDFBCB /* Dice.swift in Sources */,
 				F624899D24DEA7D700CBA95A /* SettingView.swift in Sources */,
 				F601B7F524DE9B0100ABE527 /* AppDelegate.swift in Sources */,
-				F6B1523324DFBA3F00BDFBCB /* Player.swift in Sources */,
+				F62DC14424E1554E00A2030F /* ScoreableModel.swift in Sources */,
+				F62DC14024E139B800A2030F /* GameSetting.swift in Sources */,
 				F6B1522E24DFB3A600BDFBCB /* DiceArrayView.swift in Sources */,
 				F601B80924DE9BE200ABE527 /* MainView.swift in Sources */,
 				F601B7F724DE9B0100ABE527 /* SceneDelegate.swift in Sources */,
+				F62DC14224E13D6E00A2030F /* ScoreCalculation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

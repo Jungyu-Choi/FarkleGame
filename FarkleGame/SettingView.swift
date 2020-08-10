@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SettingView: View {
-    @EnvironmentObject var gameSetting: GameSettingClass
+    @EnvironmentObject var gameSetting: GameSetting
     var maxScores = ["2000", "4000", "6000", "8000", "10000"]
     @State var currentMaxScore: Int = 0
     
@@ -31,7 +31,7 @@ struct SettingView: View {
 }
 
 struct SettingView_Previews: PreviewProvider {
-    static let preview = GameSettingClass()
+    static let preview = GameSetting()
     static var previews: some View {
         SettingView().environmentObject(preview)
     }

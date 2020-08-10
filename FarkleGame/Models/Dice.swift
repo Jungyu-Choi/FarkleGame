@@ -9,28 +9,34 @@
 import SwiftUI
 import CoreLocation
 
-class Dice: Identifiable, ObservableObject{
-    var id: Int
-    @Published var select: Bool = false {
+class Dice: ObservableObject{
+    var select: Bool = false {
         didSet {
-            print(select)
+            if self.imageName == "red\(numberOfDice)" {
+                self.imageName = String(self.numberOfDice)
+                print("unselect")
+            } else {
+                self.imageName = "red\(numberOfDice)"
+                print("select")
+            }
+            print("imageName is now \(self.imageName)")
         }
     }
-    var imageName: String
-    
-    func image() -> String {
-        if self.select {
-            return "red\(imageName)"
-        } else {
-            return imageName
+    @Published var scored: Bool = false {
+        didSet {
+            print("\(self.numberOfDice) was scored")
         }
     }
-    init(id: Int, imageName: String) {
-        self.id = id
-        self.imageName = imageName
+    @Published var numberOfDice: Int
+    @Published var imageName: String
+    
+    init(num: Int) {
+        self.numberOfDice = num
+        self.imageName = String(num)
     }
     
-    func setDice(number: Int) {
-        self.imageName = String(number)
+    func reRollDice() {
+        self.numberOfDice = Int.random(in: (1...6))
+        self.imageName = String(self.numberOfDice)
     }
 }

@@ -9,9 +9,46 @@
 import SwiftUI
 
 struct PlayGameView: View {
-    @EnvironmentObject var gameSetting: GameSettingClass
+    @EnvironmentObject var gameSetting: GameSetting
     @State var playerScore: Int = 0
     @State var comScore: Int = 0
+    var dice = DiceArrayView()
+    
+    func insertSortedDice() -> [Dice] {
+        var array: [Dice] = []
+        
+        for dice in [dice.dice1, dice.dice2, dice.dice3, dice.dice4, dice.dice5, dice.dice6] {
+            if dice.select {
+                array.append(dice)
+            }
+        }
+        if array.count < 2 {
+            return array
+        } else {
+            for _ in 1...array.count {
+                for index in 0...array.count-2 {
+                    var tmpDice: Dice
+                    if array[index].numberOfDice > array[index+1].numberOfDice {
+                        tmpDice = array[index]
+                        array[index] = array[index+1]
+                        array[index+1] = tmpDice
+                    }
+                }
+            }
+        }
+        return array
+    }
+    
+    func invisibleScoredDice() {
+        for dice in [dice.dice1, dice.dice2, dice.dice3, dice.dice4, dice.dice5, dice.dice6] {
+            if dice.select {
+                dice.select.toggle()
+                dice.scored.toggle()
+            } else {
+                dice.reRollDice()
+            }
+        }
+    }
     
     var body: some View {
         
@@ -24,9 +61,7 @@ struct PlayGameView: View {
                 }
                 Spacer()
                 HStack{
-                    DiceArrayView()
-                    .frame(width: 350, height: 250)
-                    .scaledToFit()
+                    dice
                 }
 
                 Spacer()
@@ -37,23 +72,33 @@ struct PlayGameView: View {
                 }
                 Divider()
                 HStack {
-                    Image(systemName: "repeat")
-                        .resizable()
-                    Image(systemName: "checkmark")
-                        .resizable()
-                    Image(systemName: "xmark")
-                        .resizable()
+                    Button(action: {
+                        calcScore(array: self.insertSortedDice())
+                        self.invisibleScoredDice()
+                    }) {
+                        Image(systemName: "repeat")
+                            .resizable()
+                    }
+                    Button(action: {}) {
+                        Image(systemName: "checkmark")
+                            .resizable()
+                    }
+                    Button(action: {}) {
+                        Image(systemName: "xmark")
+                            .resizable()
+                    }
                 }
                 .frame(width: 300, height: 100)
+                .buttonStyle(PlainButtonStyle())
             }
         }
         
-    .navigationBarBackButtonHidden(true)
+//    .navigationBarBackButtonHidden(true)
     }
 }
 
 struct PlayGameView_Previews: PreviewProvider {
-    static let preview = GameSettingClass()
+    static let preview = GameSetting()
     
     static var previews: some View {
         PlayGameView().environmentObject(preview)

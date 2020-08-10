@@ -8,11 +8,6 @@
 
 import SwiftUI
 
-class GameSettingClass : ObservableObject{
-    var playerName: String = "Player"
-    var settingValueOfMaxScore: Int = 0
-}
-
 struct MainView: View {
     var body: some View {
         NavigationView {
@@ -37,9 +32,8 @@ struct MainView: View {
 }
 
 struct MainView_Previews: PreviewProvider {
-    static let preview = GameSettingClass()
     
     static var previews: some View {
-        MainView().environmentObject(preview)
+        MainView()
     }
 }
