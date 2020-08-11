@@ -18,8 +18,8 @@
 		F62489A124DEC43A00CBA95A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F62489A024DEC43A00CBA95A /* README.md */; };
 		F62DC14024E139B800A2030F /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62DC13F24E139B800A2030F /* GameSetting.swift */; };
 		F62DC14224E13D6E00A2030F /* ScoreCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62DC14124E13D6E00A2030F /* ScoreCalculation.swift */; };
-		F62DC14424E1554E00A2030F /* ScoreableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62DC14324E1554E00A2030F /* ScoreableModel.swift */; };
-		F6B1522E24DFB3A600BDFBCB /* DiceArrayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B1522D24DFB3A600BDFBCB /* DiceArrayView.swift */; };
+		F63F382124E255880014113A /* DiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63F382024E255880014113A /* DiceModel.swift */; };
+		F63F382324E2AD2E0014113A /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63F382224E2AD2E0014113A /* GameOverView.swift */; };
 		F6B1523124DFB43400BDFBCB /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B1523024DFB43400BDFBCB /* Dice.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,8 +37,8 @@
 		F62489A024DEC43A00CBA95A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.markdown; };
 		F62DC13F24E139B800A2030F /* GameSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
 		F62DC14124E13D6E00A2030F /* ScoreCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCalculation.swift; sourceTree = "<group>"; };
-		F62DC14324E1554E00A2030F /* ScoreableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreableModel.swift; sourceTree = "<group>"; };
-		F6B1522D24DFB3A600BDFBCB /* DiceArrayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceArrayView.swift; sourceTree = "<group>"; };
+		F63F382024E255880014113A /* DiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceModel.swift; sourceTree = "<group>"; };
+		F63F382224E2AD2E0014113A /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		F6B1523024DFB43400BDFBCB /* Dice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,7 +83,7 @@
 				F601B80824DE9BE200ABE527 /* MainView.swift */,
 				F624899A24DEA40200CBA95A /* PlayGameView.swift */,
 				F624899C24DEA7D700CBA95A /* SettingView.swift */,
-				F6B1522D24DFB3A600BDFBCB /* DiceArrayView.swift */,
+				F63F382224E2AD2E0014113A /* GameOverView.swift */,
 			);
 			path = FarkleGame;
 			sourceTree = "<group>";
@@ -102,7 +102,7 @@
 				F6B1523024DFB43400BDFBCB /* Dice.swift */,
 				F62DC13F24E139B800A2030F /* GameSetting.swift */,
 				F62DC14124E13D6E00A2030F /* ScoreCalculation.swift */,
-				F62DC14324E1554E00A2030F /* ScoreableModel.swift */,
+				F63F382024E255880014113A /* DiceModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -180,13 +180,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F624899B24DEA40200CBA95A /* PlayGameView.swift in Sources */,
+				F63F382324E2AD2E0014113A /* GameOverView.swift in Sources */,
 				F6B1523124DFB43400BDFBCB /* Dice.swift in Sources */,
 				F624899D24DEA7D700CBA95A /* SettingView.swift in Sources */,
 				F601B7F524DE9B0100ABE527 /* AppDelegate.swift in Sources */,
-				F62DC14424E1554E00A2030F /* ScoreableModel.swift in Sources */,
 				F62DC14024E139B800A2030F /* GameSetting.swift in Sources */,
-				F6B1522E24DFB3A600BDFBCB /* DiceArrayView.swift in Sources */,
 				F601B80924DE9BE200ABE527 /* MainView.swift in Sources */,
+				F63F382124E255880014113A /* DiceModel.swift in Sources */,
 				F601B7F724DE9B0100ABE527 /* SceneDelegate.swift in Sources */,
 				F62DC14224E13D6E00A2030F /* ScoreCalculation.swift in Sources */,
 			);

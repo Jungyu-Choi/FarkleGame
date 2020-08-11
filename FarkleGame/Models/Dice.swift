@@ -20,6 +20,7 @@ class Dice: ObservableObject{
                 print("select")
             }
             print("imageName is now \(self.imageName)")
+            
         }
     }
     @Published var scored: Bool = false {
