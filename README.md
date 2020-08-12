@@ -13,6 +13,8 @@ It's the first game I've ever made using ```Swift```, ```SwiftUI```.
 
 Later, I will try to make bot and multiplay with other people =D
 
+* Farkle wikipedia - <https://en.wikipedia.org/wiki/Farkle/>
+
 > Version - 1.0.1
 >
 >   * Some bugs Fixed
@@ -28,6 +30,3 @@ Later, I will try to make bot and multiplay with other people =D
 <img width="170" src="https://user-images.githubusercontent.com/69145799/89994010-80269600-dcc2-11ea-967d-41177192cfc3.png">
 <img width="170" src="https://user-images.githubusercontent.com/69145799/89994016-8288f000-dcc2-11ea-914c-584e064e6686.png">
 </div>
-
-
-* Farkle wikipedia - <https://en.wikipedia.org/wiki/Farkle/>
