@@ -16,7 +16,6 @@ struct PlayGameView: View {
     @State var p1TmpScore: Int = 0
     @State var p2TmpScore: Int = 0
     @State var giveUpCounter: Int = 0
-    @State var showGameOver: Bool = false
     
     @ObservedObject var p1Dice1: Dice = Dice(num: Int.random(in: (1...6)))
     @ObservedObject var p1Dice2: Dice = Dice(num: Int.random(in: (1...6)))
@@ -25,29 +24,49 @@ struct PlayGameView: View {
     @ObservedObject var p1Dice5: Dice = Dice(num: Int.random(in: (1...6)))
     @ObservedObject var p1Dice6: Dice = Dice(num: Int.random(in: (1...6)))
     
-    @ObservedObject var p2Dice1: Dice = Dice(num: 1)
-    @ObservedObject var p2Dice2: Dice = Dice(num: 1)
-    @ObservedObject var p2Dice3: Dice = Dice(num: 1)
-    @ObservedObject var p2Dice4: Dice = Dice(num: 1)
-    @ObservedObject var p2Dice5: Dice = Dice(num: 1)
-    @ObservedObject var p2Dice6: Dice = Dice(num: 1)
+    @ObservedObject var p2Dice1: Dice = Dice(num: Int.random(in: (1...6)))
+    @ObservedObject var p2Dice2: Dice = Dice(num: Int.random(in: (1...6)))
+    @ObservedObject var p2Dice3: Dice = Dice(num: Int.random(in: (1...6)))
+    @ObservedObject var p2Dice4: Dice = Dice(num: Int.random(in: (1...6)))
+    @ObservedObject var p2Dice5: Dice = Dice(num: Int.random(in: (1...6)))
+    @ObservedObject var p2Dice6: Dice = Dice(num: Int.random(in: (1...6)))
     
     var body: some View {
         
         ZStack {
             Color.green.edgesIgnoringSafeArea(.all)
             VStack (spacing: 10){
-                VStack (alignment: .leading){
-                    Text("maxScore : \(gameSetting.settingValueOfMaxScore * 2000 + 2000)")
-                    Text("Player 1 : \(p1Score)(\(p1TmpScore))")
-                    Text("Player 2 : \(p2Score)(\(p2TmpScore))")
+                VStack {
+                    Text("MAX SCORE : \(gameSetting.settingValueOfMaxScore * 2000 + 2000)")
+                        .fontWeight(.bold)
+                        .padding(.all, 10)
+                        .background(Color.white.opacity(0.5))
+                        .cornerRadius(20)
+                        .font(.title)
+
+                    VStack(alignment: .leading) {
+                        Text("\(gameSetting.playerName) : \(p1Score)(\(p1TmpScore))")
+                        Text("Player 2 : \(p2Score)(\(p2TmpScore))")
+                    }
+                    .padding(.top, 20)
+                    .frame(width: 300.0)
                 }
                 Spacer()
                 HStack {
                     if turn {
-                        Text("Player 1 turn")
+                        Text("\(gameSetting.playerName) turn")
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .padding(.all, 10)
+                        .background(Color.white.opacity(0.5))
+                        .cornerRadius(20)
                     } else {
                         Text("Player 2 turn")
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .padding(.all, 10)
+                        .background(Color.white.opacity(0.5))
+                        .cornerRadius(20)
                     }
                 }
                 HStack {
@@ -226,10 +245,15 @@ struct PlayGameView: View {
                 .buttonStyle(PlainButtonStyle())
                 Spacer()
                 HStack {
-                    Button(action: {print(String(isScorable))}) {
-                        Text("DEBUG")
+                    Text("[")
+                    if self.turn && checkScorable(insertSortedDice([self.p1Dice1, self.p1Dice2, self.p1Dice3, self.p1Dice4, self.p1Dice5, self.p1Dice6])) != -1 {
+                        Text(String(checkScorable(insertSortedDice([self.p1Dice1, self.p1Dice2, self.p1Dice3, self.p1Dice4, self.p1Dice5, self.p1Dice6]))))
+                    } else if !self.turn && checkScorable(insertSortedDice([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6])) != -1 {
+                        Text(String(checkScorable(insertSortedDice([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6]))))
                     }
+                    Text("]")
                 }
+                Spacer()
                 Divider()
                 HStack {
                     Button(action: {
@@ -242,9 +266,17 @@ struct PlayGameView: View {
                             invisibleScoredDice([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6])
                             checkHotDice([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6])
                         }
+                        if self.p1Score + self.p1TmpScore >= self.gameSetting.settingValueOfMaxScore * 2000 + 2000 || self.p2Score + self.p2TmpScore >= self.gameSetting.settingValueOfMaxScore * 2000 + 2000 {
+                            self.gameSetting.gameOverP1Score = self.p1Score + self.p1TmpScore
+                            self.gameSetting.gameOverP2Score = self.p2Score + self.p2TmpScore
+                            self.gameSetting.gameOver = true
+                        }
                     }) {
                         Image(systemName: "repeat")
                             .resizable()
+                            .sheet(isPresented: self.$gameSetting.gameOver) {
+                                GameOverView(gameSetting: self.gameSetting)
+                            }
                     }
                     .disabled(!isScorable)
                     
@@ -258,35 +290,44 @@ struct PlayGameView: View {
                             endTurn([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6])
                             self.p2TmpScore = 0
                         }
+                        if self.p1Score >= self.gameSetting.settingValueOfMaxScore * 2000 + 2000 || self.p2Score >= self.gameSetting.settingValueOfMaxScore * 2000 + 2000 {
+                            self.gameSetting.gameOverP1Score = self.p1Score
+                            self.gameSetting.gameOverP2Score = self.p2Score
+                            self.gameSetting.gameOver = true
+                        }
                         self.turn.toggle()
+                        isScorable = false
                     }) {
                         Image(systemName: "checkmark")
                             .resizable()
+                            .sheet(isPresented: self.$gameSetting.gameOver) {
+                                GameOverView(gameSetting: self.gameSetting)
+                        }
                     }
                     .disabled(!isScorable)
                     
                     Button(action: {
                         self.giveUpCounter += 1
-                        if self.giveUpCounter >= 2 {
-                            self.gameSetting.gameOverP1Score = self.p1Score
-                            self.gameSetting.gameOverP2Score = self.p2Score
-                            self.showGameOver.toggle()
+                        if self.giveUpCounter == 2 {
+                            endTurn([self.p1Dice1, self.p1Dice2, self.p1Dice3, self.p1Dice4, self.p1Dice5, self.p1Dice6])
+                            endTurn([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6])
+                            self.p1TmpScore = 0
+                            self.p2TmpScore = 0
+                            self.turn.toggle()
+                            self.giveUpCounter = 0
                         } else {
                             self.turn.toggle()
                         }
                     }) {
                         Image(systemName: "xmark")
                             .resizable()
-                            .sheet(isPresented: $showGameOver) {
-                                GameOverView(gameSetting: self.gameSetting)
-                        }
                     }
                 }
                 .frame(width: 300, height: 100)
                 .buttonStyle(PlainButtonStyle())
             }
         }
-//    .navigationBarBackButtonHidden(true)
+    .navigationBarBackButtonHidden(true)
     }
 }
 

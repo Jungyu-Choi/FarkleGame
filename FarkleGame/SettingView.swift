@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SettingView: View {
     @EnvironmentObject var gameSetting: GameSetting
-    var maxScores = ["2000", "4000", "6000", "8000", "10000"]
+    let maxScores = ["2000", "4000", "6000", "8000", "10000"]
     @State var currentMaxScore: Int = 0
     
     var body: some View {

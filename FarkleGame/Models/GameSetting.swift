@@ -9,8 +9,9 @@
 import SwiftUI
 
 class GameSetting : ObservableObject{
-    @Published var playerName: String = "Player"
+    @Published var playerName: String = "Player 1"
     @Published var settingValueOfMaxScore: Int = 0
     @Published var gameOverP1Score: Int = 0
     @Published var gameOverP2Score: Int = 0
+    @Published var gameOver: Bool = false
 }

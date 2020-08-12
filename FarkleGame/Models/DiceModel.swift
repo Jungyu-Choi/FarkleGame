@@ -125,6 +125,8 @@ func checkScorable(_ sortedArray: [Dice]) -> Int {
             return 100
         } else if tmpArray.contains(5) {
             return 50
+        } else {
+            return -1
         }
     }
     var score: Int = 0
