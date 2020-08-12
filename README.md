@@ -1,7 +1,7 @@
 #   Farkle : Dice Game
 ##  SwiftUI
 
-I became interested in the dice game, Farkle while playing the ```KingdomCome: Deliverence```. So, I made it using ```SwiftUI```
+I became interested in the dice game (Farkle) while playing the ```KingdomCome: Deliverence```. So, I made it using ```SwiftUI```
 
 The game interacts with two ```class Player``` instances and the ```class Dice``` instances that each player has.
 
