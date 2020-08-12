@@ -66,7 +66,8 @@ func endTurn(_ d: [Dice]) {
     }
 }
 
-func checkScorable(_ sortedArray: [Dice]) -> Int {
+func checkScorable(_ array: [Dice]) -> Int {
+    let sortedArray = insertSortedDice(array)
     var tmpArray: [Int] = []
     
     for dice in sortedArray {

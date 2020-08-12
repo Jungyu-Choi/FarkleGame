@@ -17,20 +17,8 @@ struct PlayGameView: View {
     @State var p2TmpScore: Int = 0
     @State var giveUpCounter: Int = 0
     
-    @ObservedObject var p1Dice1: Dice = Dice(num: Int.random(in: (1...6)))
-    @ObservedObject var p1Dice2: Dice = Dice(num: Int.random(in: (1...6)))
-    @ObservedObject var p1Dice3: Dice = Dice(num: Int.random(in: (1...6)))
-    @ObservedObject var p1Dice4: Dice = Dice(num: Int.random(in: (1...6)))
-    @ObservedObject var p1Dice5: Dice = Dice(num: Int.random(in: (1...6)))
-    @ObservedObject var p1Dice6: Dice = Dice(num: Int.random(in: (1...6)))
-    
-    @ObservedObject var p2Dice1: Dice = Dice(num: Int.random(in: (1...6)))
-    @ObservedObject var p2Dice2: Dice = Dice(num: Int.random(in: (1...6)))
-    @ObservedObject var p2Dice3: Dice = Dice(num: Int.random(in: (1...6)))
-    @ObservedObject var p2Dice4: Dice = Dice(num: Int.random(in: (1...6)))
-    @ObservedObject var p2Dice5: Dice = Dice(num: Int.random(in: (1...6)))
-    @ObservedObject var p2Dice6: Dice = Dice(num: Int.random(in: (1...6)))
-    
+    @ObservedObject var player1 = Player()
+    @ObservedObject var player2 = Player()
     var body: some View {
         
         ZStack {
@@ -71,173 +59,43 @@ struct PlayGameView: View {
                 }
                 HStack {
                     if turn {
-                        if !self.p1Dice1.scored {
-                            Button(action: {
-                                self.p1Dice1.select.toggle()
-                                if checkScorable(insertSortedDice([self.p1Dice1, self.p1Dice2, self.p1Dice3, self.p1Dice4, self.p1Dice5, self.p1Dice6])) == -1 {
-                                    isScorable = false
-                                } else {
-                                    isScorable = true
+                        ForEach(self.player1.diceArray, id:\.self.id) { dice in
+                            Group {
+                                if !dice.scored {
+                                    Button(action: {
+                                        dice.select.toggle()
+                                        self.player1.reloadView.toggle()
+                                        if checkScorable(self.player1.diceArray) == -1 {
+                                            isScorable = false
+                                        } else {
+                                            isScorable = true
+                                        }
+                                    }) {
+                                        Image(dice.imageName)
+                                        .resizable()
+                                        .frame(width: 50, height: 100)
+                                    }
                                 }
-                            }) {
-                                Image(self.p1Dice1.imageName)
-                                .resizable()
-                                .frame(width: 50, height: 100)
-                            }
-                        }
-                        if !self.p1Dice2.scored {
-                            Button(action: {
-                                self.p1Dice2.select.toggle()
-                                if checkScorable(insertSortedDice([self.p1Dice1, self.p1Dice2, self.p1Dice3, self.p1Dice4, self.p1Dice5, self.p1Dice6])) == -1 {
-                                    isScorable = false
-                                } else {
-                                    isScorable = true
-                                }
-                            }) {
-                                Image(self.p1Dice2.imageName)
-                                .resizable()
-                                .frame(width: 50, height: 100)
-                            }
-                        }
-                        if !self.p1Dice3.scored {
-                            Button(action: {
-                                self.p1Dice3.select.toggle()
-                                if checkScorable(insertSortedDice([self.p1Dice1, self.p1Dice2, self.p1Dice3, self.p1Dice4, self.p1Dice5, self.p1Dice6])) == -1 {
-                                    isScorable = false
-                                } else {
-                                    isScorable = true
-                                }
-                            }) {
-                                Image(self.p1Dice3.imageName)
-                                .resizable()
-                                .frame(width: 50, height: 100)
-                            }
-                        }
-                        if !self.p1Dice4.scored {
-                            Button(action: {
-                                self.p1Dice4.select.toggle()
-                                if checkScorable(insertSortedDice([self.p1Dice1, self.p1Dice2, self.p1Dice3, self.p1Dice4, self.p1Dice5, self.p1Dice6])) == -1 {
-                                    isScorable = false
-                                } else {
-                                    isScorable = true
-                                }
-                            }) {
-                                Image(self.p1Dice4.imageName)
-                                .resizable()
-                                .frame(width: 50, height: 100)
-                            }
-                        }
-                        if !self.p1Dice5.scored {
-                            Button(action: {
-                                self.p1Dice5.select.toggle()
-                                if checkScorable(insertSortedDice([self.p1Dice1, self.p1Dice2, self.p1Dice3, self.p1Dice4, self.p1Dice5, self.p1Dice6])) == -1 {
-                                    isScorable = false
-                                } else {
-                                    isScorable = true
-                                }
-                            }) {
-                                Image(self.p1Dice5.imageName)
-                                .resizable()
-                                .frame(width: 50, height: 100)
-                            }
-                        }
-                        if !self.p1Dice6.scored {
-                            Button(action: {
-                                self.p1Dice6.select.toggle()
-                                if checkScorable(insertSortedDice([self.p1Dice1, self.p1Dice2, self.p1Dice3, self.p1Dice4, self.p1Dice5, self.p1Dice6])) == -1 {
-                                    isScorable = false
-                                } else {
-                                    isScorable = true
-                                }
-                            }) {
-                                Image(self.p1Dice6.imageName)
-                                .resizable()
-                                .frame(width: 50, height: 100)
                             }
                         }
                     } else {
-                        if !self.p2Dice1.scored {
-                            Button(action: {
-                                self.p2Dice1.select.toggle()
-                                if checkScorable(insertSortedDice([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6])) == -1 {
-                                    isScorable = false
-                                } else {
-                                    isScorable = true
+                        ForEach(self.player2.diceArray, id:\.self.id) { dice in
+                            Group {
+                                if !dice.scored {
+                                    Button(action: {
+                                        dice.select.toggle()
+                                        self.player2.reloadView.toggle()
+                                        if checkScorable(self.player2.diceArray) == -1 {
+                                            isScorable = false
+                                        } else {
+                                            isScorable = true
+                                        }
+                                    }) {
+                                        Image(dice.imageName)
+                                        .resizable()
+                                        .frame(width: 50, height: 100)
+                                    }
                                 }
-                            }) {
-                                Image(self.p2Dice1.imageName)
-                                .resizable()
-                                .frame(width: 50, height: 100)
-                            }
-                        }
-                        if !self.p2Dice2.scored {
-                            Button(action: {
-                                self.p2Dice2.select.toggle()
-                                if checkScorable(insertSortedDice([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6])) == -1 {
-                                    isScorable = false
-                                } else {
-                                    isScorable = true
-                                }
-                            }) {
-                                Image(self.p2Dice2.imageName)
-                                .resizable()
-                                .frame(width: 50, height: 100)
-                            }
-                        }
-                        if !self.p2Dice3.scored {
-                            Button(action: {
-                                self.p2Dice3.select.toggle()
-                                if checkScorable(insertSortedDice([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6])) == -1 {
-                                    isScorable = false
-                                } else {
-                                    isScorable = true
-                                }
-                            }) {
-                                Image(self.p2Dice3.imageName)
-                                .resizable()
-                                .frame(width: 50, height: 100)
-                            }
-                        }
-                        if !self.p2Dice4.scored {
-                            Button(action: {
-                                self.p2Dice4.select.toggle()
-                                if checkScorable(insertSortedDice([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6])) == -1 {
-                                    isScorable = false
-                                } else {
-                                    isScorable = true
-                                }
-                            }) {
-                                Image(self.p2Dice4.imageName)
-                                .resizable()
-                                .frame(width: 50, height: 100)
-                            }
-                        }
-                        if !self.p2Dice5.scored {
-                            Button(action: {
-                                self.p2Dice5.select.toggle()
-                                if checkScorable(insertSortedDice([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6])) == -1 {
-                                    isScorable = false
-                                } else {
-                                    isScorable = true
-                                }
-                            }) {
-                                Image(self.p2Dice5.imageName)
-                                .resizable()
-                                .frame(width: 50, height: 100)
-                            }
-                        }
-                        if !self.p2Dice6.scored {
-                            Button(action: {
-                                self.p2Dice6.select.toggle()
-                                if checkScorable(insertSortedDice([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6])) == -1 {
-                                    isScorable = false
-                                } else {
-                                    isScorable = true
-                                }
-                            }) {
-                                Image(self.p2Dice6.imageName)
-                                .resizable()
-                                .frame(width: 50, height: 100)
                             }
                         }
                     }
@@ -246,10 +104,10 @@ struct PlayGameView: View {
                 Spacer()
                 HStack {
                     Text("[")
-                    if self.turn && checkScorable(insertSortedDice([self.p1Dice1, self.p1Dice2, self.p1Dice3, self.p1Dice4, self.p1Dice5, self.p1Dice6])) != -1 {
-                        Text(String(checkScorable(insertSortedDice([self.p1Dice1, self.p1Dice2, self.p1Dice3, self.p1Dice4, self.p1Dice5, self.p1Dice6]))))
-                    } else if !self.turn && checkScorable(insertSortedDice([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6])) != -1 {
-                        Text(String(checkScorable(insertSortedDice([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6]))))
+                    if self.turn && checkScorable(self.player1.diceArray) != -1 {
+                        Text(String(checkScorable(self.player1.diceArray)))
+                    } else if !self.turn && checkScorable(self.player2.diceArray) != -1 {
+                        Text(String(checkScorable(self.player2.diceArray)))
                     }
                     Text("]")
                 }
@@ -258,13 +116,13 @@ struct PlayGameView: View {
                 HStack {
                     Button(action: {
                         if self.turn {
-                            self.p1TmpScore += checkScorable(insertSortedDice([self.p1Dice1, self.p1Dice2, self.p1Dice3, self.p1Dice4, self.p1Dice5, self.p1Dice6]))
-                            invisibleScoredDice([self.p1Dice1, self.p1Dice2, self.p1Dice3, self.p1Dice4, self.p1Dice5, self.p1Dice6])
-                            checkHotDice([self.p1Dice1, self.p1Dice2, self.p1Dice3, self.p1Dice4, self.p1Dice5, self.p1Dice6])
+                            self.p1TmpScore += checkScorable(self.player1.diceArray)
+                            invisibleScoredDice(self.player1.diceArray)
+                            checkHotDice(self.player1.diceArray)
                         } else {
-                            self.p2TmpScore += checkScorable(insertSortedDice([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6]))
-                            invisibleScoredDice([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6])
-                            checkHotDice([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6])
+                            self.p2TmpScore += checkScorable(self.player2.diceArray)
+                            invisibleScoredDice(self.player2.diceArray)
+                            checkHotDice(self.player2.diceArray)
                         }
                         if self.p1Score + self.p1TmpScore >= self.gameSetting.settingValueOfMaxScore * 2000 + 2000 || self.p2Score + self.p2TmpScore >= self.gameSetting.settingValueOfMaxScore * 2000 + 2000 {
                             self.gameSetting.gameOverP1Score = self.p1Score + self.p1TmpScore
@@ -282,12 +140,12 @@ struct PlayGameView: View {
                     
                     Button(action: {
                         if self.turn {
-                            self.p1Score += self.p1TmpScore + checkScorable(insertSortedDice([self.p1Dice1, self.p1Dice2, self.p1Dice3, self.p1Dice4, self.p1Dice5, self.p1Dice6]))
-                            endTurn([self.p1Dice1, self.p1Dice2, self.p1Dice3, self.p1Dice4, self.p1Dice5, self.p1Dice6])
+                            self.p1Score += self.p1TmpScore + checkScorable(self.player1.diceArray)
+                            endTurn(self.player1.diceArray)
                             self.p1TmpScore = 0
                         } else {
-                            self.p2Score += self.p2TmpScore + checkScorable(insertSortedDice([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6]))
-                            endTurn([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6])
+                            self.p2Score += self.p2TmpScore + checkScorable(self.player2.diceArray)
+                            endTurn(self.player2.diceArray)
                             self.p2TmpScore = 0
                         }
                         if self.p1Score >= self.gameSetting.settingValueOfMaxScore * 2000 + 2000 || self.p2Score >= self.gameSetting.settingValueOfMaxScore * 2000 + 2000 {
@@ -309,13 +167,19 @@ struct PlayGameView: View {
                     Button(action: {
                         self.giveUpCounter += 1
                         if self.giveUpCounter == 2 {
-                            endTurn([self.p1Dice1, self.p1Dice2, self.p1Dice3, self.p1Dice4, self.p1Dice5, self.p1Dice6])
-                            endTurn([self.p2Dice1, self.p2Dice2, self.p2Dice3, self.p2Dice4, self.p2Dice5, self.p2Dice6])
+                            endTurn(self.player1.diceArray)
+                            endTurn(self.player2.diceArray)
                             self.p1TmpScore = 0
                             self.p2TmpScore = 0
                             self.turn.toggle()
                             self.giveUpCounter = 0
+                        } else if self.turn {
+                            endTurn(self.player1.diceArray)
+                            self.p1TmpScore = 0
+                            self.turn.toggle()
                         } else {
+                            endTurn(self.player2.diceArray)
+                            self.p2TmpScore = 0
                             self.turn.toggle()
                         }
                     }) {

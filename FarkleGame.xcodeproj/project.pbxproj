@@ -20,6 +20,7 @@
 		F62DC14224E13D6E00A2030F /* ScoreCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62DC14124E13D6E00A2030F /* ScoreCalculation.swift */; };
 		F63F382124E255880014113A /* DiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63F382024E255880014113A /* DiceModel.swift */; };
 		F63F382324E2AD2E0014113A /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63F382224E2AD2E0014113A /* GameOverView.swift */; };
+		F67311FB24E3BE100054660E /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67311FA24E3BE100054660E /* Player.swift */; };
 		F6B1523124DFB43400BDFBCB /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B1523024DFB43400BDFBCB /* Dice.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		F62DC14124E13D6E00A2030F /* ScoreCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCalculation.swift; sourceTree = "<group>"; };
 		F63F382024E255880014113A /* DiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceModel.swift; sourceTree = "<group>"; };
 		F63F382224E2AD2E0014113A /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
+		F67311FA24E3BE100054660E /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		F6B1523024DFB43400BDFBCB /* Dice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +105,7 @@
 				F62DC13F24E139B800A2030F /* GameSetting.swift */,
 				F62DC14124E13D6E00A2030F /* ScoreCalculation.swift */,
 				F63F382024E255880014113A /* DiceModel.swift */,
+				F67311FA24E3BE100054660E /* Player.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F67311FB24E3BE100054660E /* Player.swift in Sources */,
 				F624899B24DEA40200CBA95A /* PlayGameView.swift in Sources */,
 				F63F382324E2AD2E0014113A /* GameOverView.swift in Sources */,
 				F6B1523124DFB43400BDFBCB /* Dice.swift in Sources */,

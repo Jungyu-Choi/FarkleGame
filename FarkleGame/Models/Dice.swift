@@ -9,7 +9,8 @@
 import SwiftUI
 import CoreLocation
 
-class Dice: ObservableObject{
+class Dice: ObservableObject, Identifiable {
+    var id: Int
     var select: Bool = false {
         didSet {
             if self.imageName == "red\(numberOfDice)" {
@@ -31,7 +32,8 @@ class Dice: ObservableObject{
     @Published var numberOfDice: Int
     @Published var imageName: String
     
-    init(num: Int) {
+    init(num: Int, id: Int) {
+        self.id = id
         self.numberOfDice = num
         self.imageName = String(num)
     }
