@@ -8,10 +8,9 @@
 
 import Foundation
 
-func calcScore(_ arr: [Int]) -> Int{
-    
-    print("DEBUG: calcScore \(arr)")
-    
+func calcScore(_ arr: [Int]) -> Int?{
+
+    // MARK: - Calculating duplicated dice
     switch arr.count {
     case 1:
         if arr.contains(1){
@@ -21,7 +20,7 @@ func calcScore(_ arr: [Int]) -> Int{
             return 50
         }
         else{
-            return -1
+            return nil
         }
     case 2:
         if arr.contains(1){
@@ -31,7 +30,7 @@ func calcScore(_ arr: [Int]) -> Int{
             return 100
         }
         else{
-            return -1
+            return nil
         }
     case 3:
         if arr.contains(1){
@@ -55,6 +54,6 @@ func calcScore(_ arr: [Int]) -> Int{
             return arr[0] * 400
         }
     default:
-        return -1
+        return nil
     }
 }

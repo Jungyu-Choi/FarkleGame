@@ -15,6 +15,10 @@ Later, I will try to make bot and multiplay with other people =D
 
 * Farkle wikipedia - <https://en.wikipedia.org/wiki/Farkle/>
 
+> Version - 1.0.2
+>
+>   * Code optimizing
+>
 > Version - 1.0.1
 >
 >   * Some bugs Fixed

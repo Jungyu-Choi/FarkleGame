@@ -8,31 +8,16 @@
 
 import Foundation
 
-var isScorable: Bool = false
+var isScorable = false
 
 func insertSortedDice(_ d: [Dice]) -> [Dice] {
-    var array: [Dice] = []
+    let array = d.filter{ $0.select }
     
-    for dice in d {
-        if dice.select {
-            array.append(dice)
-        }
-    }
-    if array.count < 2 {
-        return array
+    if array.count > 1 {
+        return array.sorted(by: { $0.numberOfDice < $1.numberOfDice })
     } else {
-        for _ in 1...array.count {
-            for index in 0...array.count-2 {
-                var tmpDice: Dice
-                if array[index].numberOfDice > array[index+1].numberOfDice {
-                    tmpDice = array[index]
-                    array[index] = array[index+1]
-                    array[index+1] = tmpDice
-                }
-            }
-        }
+        return array
     }
-    return array
 }
 
 func invisibleScoredDice(_ d: [Dice]) {
@@ -66,9 +51,9 @@ func endTurn(_ d: [Dice]) {
     }
 }
 
-func checkScorable(_ array: [Dice]) -> Int {
+func checkScorable(_ array: [Dice]) -> Int? {
     let sortedArray = insertSortedDice(array)
-    var tmpArray: [Int] = []
+    var tmpArray = [Int]()
     
     for dice in sortedArray {
         if dice.select {
@@ -77,7 +62,7 @@ func checkScorable(_ array: [Dice]) -> Int {
     }
     
     if tmpArray.count == 0 {
-        return -1
+        return nil
     }
     
     if tmpArray.count == 5 {
@@ -104,7 +89,7 @@ func checkScorable(_ array: [Dice]) -> Int {
             case 5:
                 return 550
             default:
-                return -1
+                return nil
             }
         } else if tmpArray.contains(2), tmpArray.contains(3), tmpArray.contains(4), tmpArray.contains(5), tmpArray.contains(6) {
             var dupDice = 0
@@ -118,7 +103,7 @@ func checkScorable(_ array: [Dice]) -> Int {
             case 5:
                 return 800
             default:
-                return -1
+                return nil
             }
         }
     } else if tmpArray.count == 1 {
@@ -127,12 +112,12 @@ func checkScorable(_ array: [Dice]) -> Int {
         } else if tmpArray.contains(5) {
             return 50
         } else {
-            return -1
+            return nil
         }
     }
-    var score: Int = 0
-    var stack: Int = 0
-    var stackDiceArray: [Int] = []
+    var score = 0
+    var stack = 0
+    var stackDiceArray = [Int]()
     
     for index in 0...tmpArray.count-2 {
         stackDiceArray.append(tmpArray[index])
@@ -143,34 +128,36 @@ func checkScorable(_ array: [Dice]) -> Int {
             if index == tmpArray.count-2 {
                 stackDiceArray.append(tmpArray[index + 1])
                 
-                if calcScore(stackDiceArray) == -1 {
-                    return -1
+                if let calculatedScore = calcScore(stackDiceArray) {
+                    score += calculatedScore
+                    stackDiceArray.removeAll()
+                    stack = 0
+                } else {
+                    return nil
                 }
-                
-                score += calcScore(stackDiceArray)
-                stackDiceArray.removeAll()
-                stack = 0
             }
         } else {
-            if calcScore(stackDiceArray) == -1 {
-                return -1
+            if let calculatedScore = calcScore(stackDiceArray) {
+                score += calculatedScore
+                stackDiceArray.removeAll()
+            } else {
+                return nil
             }
-            
-            score += calcScore(stackDiceArray)
-            stackDiceArray.removeAll()
             
             if index == tmpArray.count-2 {
                 stackDiceArray.append(tmpArray[index + 1])
                 
-                if calcScore(stackDiceArray) == -1 {
-                    return -1
+                if let calculatedScore = calcScore(stackDiceArray) {
+                    score += calculatedScore
+                    stackDiceArray.removeAll()
+                } else {
+                    return nil
                 }
-                
-                score += calcScore(stackDiceArray)
-                stackDiceArray.removeAll()
             }
             stack = 0
         }
     }
     return score
 }
+
+

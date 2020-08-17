@@ -58,9 +58,9 @@
 		F601B7E824DE9B0100ABE527 = {
 			isa = PBXGroup;
 			children = (
-				F62489A024DEC43A00CBA95A /* README.md */,
 				F601B7F324DE9B0100ABE527 /* FarkleGame */,
 				F601B7F224DE9B0100ABE527 /* Products */,
+				F62489A024DEC43A00CBA95A /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -75,17 +75,17 @@
 		F601B7F324DE9B0100ABE527 /* FarkleGame */ = {
 			isa = PBXGroup;
 			children = (
-				F6B1522F24DFB42000BDFBCB /* Models */,
 				F601B7F424DE9B0100ABE527 /* AppDelegate.swift */,
-				F601B7F624DE9B0100ABE527 /* SceneDelegate.swift */,
 				F601B7FA24DE9B0800ABE527 /* Assets.xcassets */,
-				F601B7FF24DE9B0800ABE527 /* LaunchScreen.storyboard */,
-				F601B80224DE9B0800ABE527 /* Info.plist */,
-				F601B7FC24DE9B0800ABE527 /* Preview Content */,
-				F601B80824DE9BE200ABE527 /* MainView.swift */,
-				F624899A24DEA40200CBA95A /* PlayGameView.swift */,
-				F624899C24DEA7D700CBA95A /* SettingView.swift */,
 				F63F382224E2AD2E0014113A /* GameOverView.swift */,
+				F601B80224DE9B0800ABE527 /* Info.plist */,
+				F601B7FF24DE9B0800ABE527 /* LaunchScreen.storyboard */,
+				F601B80824DE9BE200ABE527 /* MainView.swift */,
+				F6B1522F24DFB42000BDFBCB /* Models */,
+				F624899A24DEA40200CBA95A /* PlayGameView.swift */,
+				F601B7FC24DE9B0800ABE527 /* Preview Content */,
+				F601B7F624DE9B0100ABE527 /* SceneDelegate.swift */,
+				F624899C24DEA7D700CBA95A /* SettingView.swift */,
 			);
 			path = FarkleGame;
 			sourceTree = "<group>";

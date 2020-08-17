@@ -15,7 +15,6 @@ struct PlayGameView: View {
     @State var p2Score: Int = 0
     @State var p1TmpScore: Int = 0
     @State var p2TmpScore: Int = 0
-    @State var giveUpCounter: Int = 0
     
     @ObservedObject var player1 = Player()
     @ObservedObject var player2 = Player()
@@ -31,7 +30,7 @@ struct PlayGameView: View {
                         .background(Color.white.opacity(0.5))
                         .cornerRadius(20)
                         .font(.title)
-
+                    
                     VStack(alignment: .leading) {
                         Text("\(gameSetting.playerName) : \(p1Score)(\(p1TmpScore))")
                         Text("Player 2 : \(p2Score)(\(p2TmpScore))")
@@ -43,18 +42,18 @@ struct PlayGameView: View {
                 HStack {
                     if turn {
                         Text("\(gameSetting.playerName) turn")
-                        .font(.headline)
-                        .fontWeight(.bold)
-                        .padding(.all, 10)
-                        .background(Color.white.opacity(0.5))
-                        .cornerRadius(20)
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .padding(.all, 10)
+                            .background(Color.white.opacity(0.5))
+                            .cornerRadius(20)
                     } else {
                         Text("Player 2 turn")
-                        .font(.headline)
-                        .fontWeight(.bold)
-                        .padding(.all, 10)
-                        .background(Color.white.opacity(0.5))
-                        .cornerRadius(20)
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .padding(.all, 10)
+                            .background(Color.white.opacity(0.5))
+                            .cornerRadius(20)
                     }
                 }
                 HStack {
@@ -72,8 +71,8 @@ struct PlayGameView: View {
                                         }
                                     }) {
                                         Image(dice.imageName)
-                                        .resizable()
-                                        .frame(width: 50, height: 100)
+                                            .resizable()
+                                            .frame(width: 50, height: 100)
                                     }
                                 }
                             }
@@ -92,8 +91,8 @@ struct PlayGameView: View {
                                         }
                                     }) {
                                         Image(dice.imageName)
-                                        .resizable()
-                                        .frame(width: 50, height: 100)
+                                            .resizable()
+                                            .frame(width: 50, height: 100)
                                     }
                                 }
                             }
@@ -104,23 +103,24 @@ struct PlayGameView: View {
                 Spacer()
                 HStack {
                     Text("[")
-                    if self.turn && checkScorable(self.player1.diceArray) != -1 {
-                        Text(String(checkScorable(self.player1.diceArray)))
-                    } else if !self.turn && checkScorable(self.player2.diceArray) != -1 {
-                        Text(String(checkScorable(self.player2.diceArray)))
+                    if self.turn && checkScorable(self.player1.diceArray) != nil {
+                        Text(String(checkScorable(self.player1.diceArray)!))
+                    } else if !self.turn && checkScorable(self.player2.diceArray) != nil {
+                        Text(String(checkScorable(self.player2.diceArray)!))
                     }
                     Text("]")
                 }
                 Spacer()
                 Divider()
                 HStack {
+                    // MARK: - Reroll Button
                     Button(action: {
                         if self.turn {
-                            self.p1TmpScore += checkScorable(self.player1.diceArray)
+                            self.p1TmpScore += checkScorable(self.player1.diceArray)!
                             invisibleScoredDice(self.player1.diceArray)
                             checkHotDice(self.player1.diceArray)
                         } else {
-                            self.p2TmpScore += checkScorable(self.player2.diceArray)
+                            self.p2TmpScore += checkScorable(self.player2.diceArray)!
                             invisibleScoredDice(self.player2.diceArray)
                             checkHotDice(self.player2.diceArray)
                         }
@@ -134,17 +134,18 @@ struct PlayGameView: View {
                             .resizable()
                             .sheet(isPresented: self.$gameSetting.gameOver) {
                                 GameOverView(gameSetting: self.gameSetting)
-                            }
+                        }
                     }
                     .disabled(!isScorable)
                     
+                    // MARK: - End Turn Button
                     Button(action: {
                         if self.turn {
-                            self.p1Score += self.p1TmpScore + checkScorable(self.player1.diceArray)
+                            self.p1Score += self.p1TmpScore + checkScorable(self.player1.diceArray)!
                             endTurn(self.player1.diceArray)
                             self.p1TmpScore = 0
                         } else {
-                            self.p2Score += self.p2TmpScore + checkScorable(self.player2.diceArray)
+                            self.p2Score += self.p2TmpScore + checkScorable(self.player2.diceArray)!
                             endTurn(self.player2.diceArray)
                             self.p2TmpScore = 0
                         }
@@ -163,17 +164,9 @@ struct PlayGameView: View {
                         }
                     }
                     .disabled(!isScorable)
-                    
+                    // MARK: - Give Up Button
                     Button(action: {
-                        self.giveUpCounter += 1
-                        if self.giveUpCounter == 2 {
-                            endTurn(self.player1.diceArray)
-                            endTurn(self.player2.diceArray)
-                            self.p1TmpScore = 0
-                            self.p2TmpScore = 0
-                            self.turn.toggle()
-                            self.giveUpCounter = 0
-                        } else if self.turn {
+                        if self.turn {
                             endTurn(self.player1.diceArray)
                             self.p1TmpScore = 0
                             self.turn.toggle()
@@ -191,7 +184,7 @@ struct PlayGameView: View {
                 .buttonStyle(PlainButtonStyle())
             }
         }
-    .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(true)
     }
 }
 

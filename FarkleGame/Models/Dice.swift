@@ -6,31 +6,23 @@
 //  Copyright © 2020 Jungyu Choi. All rights reserved.
 //
 
-import SwiftUI
-import CoreLocation
+import Foundation
 
-class Dice: ObservableObject, Identifiable {
-    var id: Int
-    var select: Bool = false {
+class Dice: Identifiable {
+    let id: Int
+    var select = false {
         didSet {
             if self.imageName == "red\(numberOfDice)" {
                 self.imageName = String(self.numberOfDice)
-                print("unselect")
             } else {
                 self.imageName = "red\(numberOfDice)"
-                print("select")
             }
-            print("imageName is now \(self.imageName)")
             
         }
     }
-    @Published var scored: Bool = false {
-        didSet {
-            print("\(self.numberOfDice) was scored")
-        }
-    }
-    @Published var numberOfDice: Int
-    @Published var imageName: String
+    var scored = false
+    var numberOfDice: Int
+    var imageName: String
     
     init(num: Int, id: Int) {
         self.id = id
