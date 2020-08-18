@@ -9,10 +9,14 @@
 import Foundation
 
 class Player: ObservableObject {
+    @Published var turn: Bool
     @Published var reloadView = false
+    @Published var score = 0
+    @Published var tmpScore = 0
     var diceArray = [Dice]()
     
-    init() {
+    init(turn: Bool) {
+        self.turn = turn
         diceArray.append(contentsOf: [
             Dice(num: Int.random(in: (1...6)), id: 1),
             Dice(num: Int.random(in: (1...6)), id: 2),

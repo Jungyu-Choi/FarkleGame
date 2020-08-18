@@ -22,6 +22,7 @@
 		F63F382324E2AD2E0014113A /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63F382224E2AD2E0014113A /* GameOverView.swift */; };
 		F67311FB24E3BE100054660E /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67311FA24E3BE100054660E /* Player.swift */; };
 		F6B1523124DFB43400BDFBCB /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B1523024DFB43400BDFBCB /* Dice.swift */; };
+		F6E8F74624EA757D006AE5C2 /* Computer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E8F74524EA757D006AE5C2 /* Computer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		F63F382224E2AD2E0014113A /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		F67311FA24E3BE100054660E /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		F6B1523024DFB43400BDFBCB /* Dice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dice.swift; sourceTree = "<group>"; };
+		F6E8F74524EA757D006AE5C2 /* Computer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Computer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,17 +77,17 @@
 		F601B7F324DE9B0100ABE527 /* FarkleGame */ = {
 			isa = PBXGroup;
 			children = (
-				F601B7F424DE9B0100ABE527 /* AppDelegate.swift */,
-				F601B7FA24DE9B0800ABE527 /* Assets.xcassets */,
-				F63F382224E2AD2E0014113A /* GameOverView.swift */,
 				F601B80224DE9B0800ABE527 /* Info.plist */,
-				F601B7FF24DE9B0800ABE527 /* LaunchScreen.storyboard */,
+				F601B7F424DE9B0100ABE527 /* AppDelegate.swift */,
+				F63F382224E2AD2E0014113A /* GameOverView.swift */,
 				F601B80824DE9BE200ABE527 /* MainView.swift */,
-				F6B1522F24DFB42000BDFBCB /* Models */,
 				F624899A24DEA40200CBA95A /* PlayGameView.swift */,
-				F601B7FC24DE9B0800ABE527 /* Preview Content */,
 				F601B7F624DE9B0100ABE527 /* SceneDelegate.swift */,
 				F624899C24DEA7D700CBA95A /* SettingView.swift */,
+				F601B7FA24DE9B0800ABE527 /* Assets.xcassets */,
+				F601B7FF24DE9B0800ABE527 /* LaunchScreen.storyboard */,
+				F6B1522F24DFB42000BDFBCB /* Models */,
+				F601B7FC24DE9B0800ABE527 /* Preview Content */,
 			);
 			path = FarkleGame;
 			sourceTree = "<group>";
@@ -106,6 +108,7 @@
 				F62DC14124E13D6E00A2030F /* ScoreCalculation.swift */,
 				F63F382024E255880014113A /* DiceModel.swift */,
 				F67311FA24E3BE100054660E /* Player.swift */,
+				F6E8F74524EA757D006AE5C2 /* Computer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6E8F74624EA757D006AE5C2 /* Computer.swift in Sources */,
 				F67311FB24E3BE100054660E /* Player.swift in Sources */,
 				F624899B24DEA40200CBA95A /* PlayGameView.swift in Sources */,
 				F63F382324E2AD2E0014113A /* GameOverView.swift in Sources */,

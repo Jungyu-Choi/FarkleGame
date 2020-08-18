@@ -10,19 +10,16 @@ import SwiftUI
 
 struct PlayGameView: View {
     @EnvironmentObject var gameSetting: GameSetting
-    @State var turn: Bool = true // p1 = true, p2 = false
-    @State var p1Score: Int = 0
-    @State var p2Score: Int = 0
-    @State var p1TmpScore: Int = 0
-    @State var p2TmpScore: Int = 0
+    @ObservedObject var player1 = Player(turn: true)
+    @ObservedObject var player2 = Player(turn: false)
+    let com = true
     
-    @ObservedObject var player1 = Player()
-    @ObservedObject var player2 = Player()
     var body: some View {
         
         ZStack {
             Color.green.edgesIgnoringSafeArea(.all)
             VStack (spacing: 10){
+                // MARK: - SCORE VIEW
                 VStack {
                     Text("MAX SCORE : \(gameSetting.settingValueOfMaxScore * 2000 + 2000)")
                         .fontWeight(.bold)
@@ -32,15 +29,15 @@ struct PlayGameView: View {
                         .font(.title)
                     
                     VStack(alignment: .leading) {
-                        Text("\(gameSetting.playerName) : \(p1Score)(\(p1TmpScore))")
-                        Text("Player 2 : \(p2Score)(\(p2TmpScore))")
+                        Text("\(gameSetting.playerName) : \(player1.score)(\(player1.tmpScore))")
+                        Text("Player 2 : \(player2.score)(\(player2.tmpScore))")
                     }
                     .padding(.top, 20)
                     .frame(width: 300.0)
                 }
                 Spacer()
                 HStack {
-                    if turn {
+                    if player1.turn {
                         Text("\(gameSetting.playerName) turn")
                             .font(.headline)
                             .fontWeight(.bold)
@@ -56,8 +53,9 @@ struct PlayGameView: View {
                             .cornerRadius(20)
                     }
                 }
+                // MARK: - DICE VIEW
                 HStack {
-                    if turn {
+                    if player1.turn {
                         ForEach(self.player1.diceArray, id:\.self.id) { dice in
                             Group {
                                 if !dice.scored {
@@ -101,32 +99,40 @@ struct PlayGameView: View {
                 }
                 .buttonStyle(PlainButtonStyle())
                 Spacer()
+                // MARK: - TEMPORARY SCORE VIEW
                 HStack {
                     Text("[")
-                    if self.turn && checkScorable(self.player1.diceArray) != nil {
+                    if player1.turn && checkScorable(self.player1.diceArray) != nil {
                         Text(String(checkScorable(self.player1.diceArray)!))
-                    } else if !self.turn && checkScorable(self.player2.diceArray) != nil {
+                    } else if player2.turn && checkScorable(self.player2.diceArray) != nil {
                         Text(String(checkScorable(self.player2.diceArray)!))
                     }
                     Text("]")
                 }
                 Spacer()
+                Button(action: {
+                    print(self.player2.diceArray)
+                    self.player2.computerTurn(self.player1.score, self.player2.score, self.player2.diceArray)
+                }) {
+                    Text("COM")
+                }
                 Divider()
+                // MARK: - BUTTON VIEW
                 HStack {
                     // MARK: - Reroll Button
                     Button(action: {
-                        if self.turn {
-                            self.p1TmpScore += checkScorable(self.player1.diceArray)!
+                        if self.player1.turn {
+                            self.player1.tmpScore += checkScorable(self.player1.diceArray)!
                             invisibleScoredDice(self.player1.diceArray)
                             checkHotDice(self.player1.diceArray)
                         } else {
-                            self.p2TmpScore += checkScorable(self.player2.diceArray)!
+                            self.player2.tmpScore += checkScorable(self.player2.diceArray)!
                             invisibleScoredDice(self.player2.diceArray)
                             checkHotDice(self.player2.diceArray)
                         }
-                        if self.p1Score + self.p1TmpScore >= self.gameSetting.settingValueOfMaxScore * 2000 + 2000 || self.p2Score + self.p2TmpScore >= self.gameSetting.settingValueOfMaxScore * 2000 + 2000 {
-                            self.gameSetting.gameOverP1Score = self.p1Score + self.p1TmpScore
-                            self.gameSetting.gameOverP2Score = self.p2Score + self.p2TmpScore
+                        if self.player1.score + self.player1.tmpScore >= self.gameSetting.settingValueOfMaxScore * 2000 + 2000 || self.player2.score + self.player2.tmpScore >= self.gameSetting.settingValueOfMaxScore * 2000 + 2000 {
+                            self.gameSetting.gameOverP1Score = self.player1.score + self.player1.tmpScore
+                            self.gameSetting.gameOverP2Score = self.player2.score + self.player2.tmpScore
                             self.gameSetting.gameOver = true
                         }
                     }) {
@@ -140,21 +146,28 @@ struct PlayGameView: View {
                     
                     // MARK: - End Turn Button
                     Button(action: {
-                        if self.turn {
-                            self.p1Score += self.p1TmpScore + checkScorable(self.player1.diceArray)!
+                        if self.player1.turn {
+                            self.player1.score += self.player1.tmpScore + checkScorable(self.player1.diceArray)!
                             endTurn(self.player1.diceArray)
-                            self.p1TmpScore = 0
+                            self.player1.tmpScore = 0
+                            if self.com {
+                                self.player2.computerTurn(self.player1.score, self.player2.score, self.player2.diceArray)
+                                endTurn(self.player2.diceArray)
+                                return
+                            }
+                            
                         } else {
-                            self.p2Score += self.p2TmpScore + checkScorable(self.player2.diceArray)!
+                            self.player2.score += self.player2.tmpScore + checkScorable(self.player2.diceArray)!
                             endTurn(self.player2.diceArray)
-                            self.p2TmpScore = 0
+                            self.player2.tmpScore = 0
                         }
-                        if self.p1Score >= self.gameSetting.settingValueOfMaxScore * 2000 + 2000 || self.p2Score >= self.gameSetting.settingValueOfMaxScore * 2000 + 2000 {
-                            self.gameSetting.gameOverP1Score = self.p1Score
-                            self.gameSetting.gameOverP2Score = self.p2Score
+                        if self.player1.score >= self.gameSetting.settingValueOfMaxScore * 2000 + 2000 || self.player2.score >= self.gameSetting.settingValueOfMaxScore * 2000 + 2000 {
+                            self.gameSetting.gameOverP1Score = self.player1.score
+                            self.gameSetting.gameOverP2Score = self.player2.score
                             self.gameSetting.gameOver = true
                         }
-                        self.turn.toggle()
+                        self.player1.turn.toggle()
+                        self.player2.turn.toggle()
                         isScorable = false
                     }) {
                         Image(systemName: "checkmark")
@@ -166,15 +179,15 @@ struct PlayGameView: View {
                     .disabled(!isScorable)
                     // MARK: - Give Up Button
                     Button(action: {
-                        if self.turn {
+                        if self.player1.turn {
                             endTurn(self.player1.diceArray)
-                            self.p1TmpScore = 0
-                            self.turn.toggle()
+                            self.player1.tmpScore = 0
                         } else {
                             endTurn(self.player2.diceArray)
-                            self.p2TmpScore = 0
-                            self.turn.toggle()
+                            self.player2.tmpScore = 0
                         }
+                        self.player1.turn.toggle()
+                        self.player2.turn.toggle()
                     }) {
                         Image(systemName: "xmark")
                             .resizable()

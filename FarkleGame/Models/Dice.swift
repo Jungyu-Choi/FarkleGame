@@ -17,7 +17,6 @@ class Dice: Identifiable {
             } else {
                 self.imageName = "red\(numberOfDice)"
             }
-            
         }
     }
     var scored = false
@@ -33,5 +32,9 @@ class Dice: Identifiable {
     func reRollDice() {
         self.numberOfDice = Int.random(in: (1...6))
         self.imageName = String(self.numberOfDice)
+    }
+    
+    func debug(){
+        print("index : \(id), select : \(select), scored: \(scored), number : \(numberOfDice)")
     }
 }

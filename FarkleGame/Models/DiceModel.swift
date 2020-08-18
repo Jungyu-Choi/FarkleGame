@@ -12,7 +12,7 @@ var isScorable = false
 
 func insertSortedDice(_ d: [Dice]) -> [Dice] {
     let array = d.filter{ $0.select }
-    
+
     if array.count > 1 {
         return array.sorted(by: { $0.numberOfDice < $1.numberOfDice })
     } else {
@@ -21,7 +21,9 @@ func insertSortedDice(_ d: [Dice]) -> [Dice] {
 }
 
 func invisibleScoredDice(_ d: [Dice]) {
+    print("invisibleScoredDice")
     for dice in d {
+        dice.debug()
         if dice.select {
             dice.select = false
             dice.scored = true
