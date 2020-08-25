@@ -25,6 +25,12 @@ struct SettingView: View {
                     }
                 }
             }
+            Section(header: Text("Select opponent")) {
+                Toggle(isOn: $gameSetting.vsComputer) {
+                    Text("Vs. COM")
+                }
+            }
+            Text("v1.1")
         }
         .navigationBarTitle("Setting")
     }

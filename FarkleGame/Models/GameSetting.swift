@@ -14,4 +14,5 @@ class GameSetting : ObservableObject{
     @Published var gameOverP1Score = 0
     @Published var gameOverP2Score = 0
     @Published var gameOver = false
+    @Published var vsComputer = false
 }

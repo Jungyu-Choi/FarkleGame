@@ -13,17 +13,36 @@ struct GameOverView: View {
     
     var body: some View {
         VStack {
-            Spacer()
-            Text("Congratuation!")
-            if gameSetting.gameOverP1Score > gameSetting.gameOverP2Score {
-                Text("Player 1")
+            if gameSetting.vsComputer {
+                Group {
+                    Spacer()
+                    if gameSetting.gameOverP1Score > gameSetting.gameOverP2Score {
+                        Text("Congratuation!")
+                        Text(gameSetting.playerName)
+                        Text("YOU WON!")
+                    } else {
+                        Text("GAME OVER")
+                        Text("YOU LOSE!")
+                    }
+                    Spacer()
+                    Text("\(gameSetting.playerName) : \(gameSetting.gameOverP1Score)")
+                    Text("COM : \(gameSetting.gameOverP2Score)")
+                }
             } else {
-                Text("Player 2")
+                Group {
+                    Spacer()
+                    Text("Congratuation!")
+                    if gameSetting.gameOverP1Score > gameSetting.gameOverP2Score {
+                        Text(gameSetting.playerName)
+                    } else {
+                        Text("Player 2")
+                    }
+                    Text("YOU WON!")
+                    Spacer()
+                    Text("\(gameSetting.playerName) : \(gameSetting.gameOverP1Score)")
+                    Text("Player 2 : \(gameSetting.gameOverP2Score)")
+                }
             }
-            Text("YOU WON!")
-            Spacer()
-            Text("Player 1 : \(gameSetting.gameOverP1Score)")
-            Text("Player 2 : \(gameSetting.gameOverP2Score)")
         }
     }
 }

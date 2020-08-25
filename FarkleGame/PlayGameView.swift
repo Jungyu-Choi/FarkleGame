@@ -12,7 +12,6 @@ struct PlayGameView: View {
     @EnvironmentObject var gameSetting: GameSetting
     @ObservedObject var player1 = Player(turn: true)
     @ObservedObject var player2 = Player(turn: false)
-    let com = true
     
     var body: some View {
         
@@ -110,12 +109,6 @@ struct PlayGameView: View {
                     Text("]")
                 }
                 Spacer()
-                Button(action: {
-                    print(self.player2.diceArray)
-                    self.player2.computerTurn(self.player1.score, self.player2.score, self.player2.diceArray)
-                }) {
-                    Text("COM")
-                }
                 Divider()
                 // MARK: - BUTTON VIEW
                 HStack {
@@ -150,9 +143,14 @@ struct PlayGameView: View {
                             self.player1.score += self.player1.tmpScore + checkScorable(self.player1.diceArray)!
                             endTurn(self.player1.diceArray)
                             self.player1.tmpScore = 0
-                            if self.com {
-                                self.player2.computerTurn(self.player1.score, self.player2.score, self.player2.diceArray)
+                            if self.gameSetting.vsComputer {
+                                self.player2.computerTurn(self.player1.score, self.player2.score)
                                 endTurn(self.player2.diceArray)
+                                if self.player2.score >= self.gameSetting.settingValueOfMaxScore * 2000 + 2000 {
+                                    self.gameSetting.gameOverP1Score = self.player1.score
+                                    self.gameSetting.gameOverP2Score = self.player2.score
+                                    self.gameSetting.gameOver = true
+                                }
                                 return
                             }
                             
@@ -182,6 +180,18 @@ struct PlayGameView: View {
                         if self.player1.turn {
                             endTurn(self.player1.diceArray)
                             self.player1.tmpScore = 0
+                            
+                            if self.gameSetting.vsComputer {
+                                self.player2.computerTurn(self.player1.score, self.player2.score)
+                                endTurn(self.player2.diceArray)
+                                if self.player2.score >= self.gameSetting.settingValueOfMaxScore * 2000 + 2000 {
+                                    self.gameSetting.gameOverP1Score = self.player1.score
+                                    self.gameSetting.gameOverP2Score = self.player2.score
+                                    self.gameSetting.gameOver = true
+                                }
+                                return
+                            }
+                            
                         } else {
                             endTurn(self.player2.diceArray)
                             self.player2.tmpScore = 0
